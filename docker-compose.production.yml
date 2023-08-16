@@ -20,7 +20,7 @@ services:
       - static:/static/
       - media:/app/media/
     depends_on:
-      - db1
+      - db
 
   kittygram_frontend:
     image: larivall/kittygram_frontend

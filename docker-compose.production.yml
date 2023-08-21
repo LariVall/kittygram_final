@@ -1,40 +1,33 @@
 version: '3'
 
 volumes:
-  kitty_pg_data:
+  pg_data:
   static:
   media:
 
 services:
-
   db:
-    image: postgres:13.10
-    env_file: .env
+    image: postgres:13
     volumes:
-      - kitty_pg_data:/var/lib/postgresql/data
-
-  kittygram_backend:
+      - pg_data:/var/lib/postgresql/data
+    env_file: .env
+  backend:
     image: larivall/kittygram_backend
     env_file: .env
     volumes:
-      - static:/backend_static/
-      - media:/app/media/
-    depends_on:
-      - db
-
-  kittygram_frontend:
-    image: larivall/kittygram_frontend
+      - static:/backend_static
+      - media:/media
+  frontend:
     env_file: .env
-    command: cp -r /app/build/. /static/
+    image: larivall/kittygram_frontend
+    command: cp -r /app/build/. /frontend_static/
     volumes:
       - static:/frontend_static
-      - media:/app/media
-
-  kittygram_gateway:
+  gateway:
     image: larivall/kittygram_gateway
     env_file: .env
     ports:
       - 9000:80
     volumes:
-      - static:/staticfiles/
-      - media:/app/media/
+      - static:/staticfiles
+      - media:/media

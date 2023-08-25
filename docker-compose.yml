@@ -8,6 +8,7 @@ volumes:
 services:
   db:
     image: postgres:13
+    env_file: .env
     volumes:
       - pg_data:/var/lib/postgresql/data
   kittygram_backend:
@@ -28,5 +29,5 @@ services:
     ports:
       - 9000:80
     volumes:
-      - static:/staticfiles/
+      - static:/staticfiles
       - media:/app/media

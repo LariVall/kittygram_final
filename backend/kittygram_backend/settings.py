@@ -11,7 +11,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = False
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -60,9 +60,9 @@ WSGI_APPLICATION = 'kittygram_backend.wsgi.application'
 DATABASES = {
    'default': {
        'ENGINE': 'django.db.backends.postgresql',
-       'NAME': os.getenv('POSTGRES_DB', 'kittygram'),
-       'USER': os.getenv('POSTGRES_USER', 'kittygram_user'),
-       'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'kittygram_password'),
+       'NAME': os.getenv('POSTGRES_DB', 'name'),
+       'USER': os.getenv('POSTGRES_USER', 'django'),
+       'PASSWORD': os.getenv('POSTGRES_PASSWORD', ''),
        'HOST': os.getenv('DB_HOST', 'db'),
        'PORT': os.getenv('DB_PORT', 5432)
    }

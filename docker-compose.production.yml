@@ -6,24 +6,28 @@ volumes:
   media:
 
 services:
+
   db:
     image: postgres:13
     env_file: .env
     volumes:
       - pg_data:/var/lib/postgresql/data
-  backend:
+      
+  kittygram_backend:
     image: larivall/kittygram_backend
     env_file: .env
     volumes:
       - static:/backend_static
       - media:/media
-  frontend:
+      
+  kittygram_frontend:
     env_file: .env
     image: larivall/kittygram_frontend
     command: cp -r /app/build/. /frontend_static/
     volumes:
       - static:/frontend_static
-  gateway:
+      
+  kittygram_gateway:
     image: larivall/kittygram_gateway
     env_file: .env
     volumes:
